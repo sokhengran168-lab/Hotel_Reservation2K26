@@ -36,8 +36,8 @@
                         <td class="px-6 py-4 text-sm text-gray-600">{{ $booking->start_date->format('M d, Y') }}</td>
                         <td class="px-6 py-4 text-sm text-gray-600">{{ $booking->end_date->format('M d, Y') }}</td>
                         <td class="px-6 py-4 text-sm text-gray-800 font-semibold">${{ number_format($booking->total_amount, 2) }}</td>
-                        <td class="px-6 py-4 text-sm">
-                            <span class="px-3 py-1 rounded-full text-xs font-semibold
+                        <td class="px-6 py-4 text-sm whitespace-nowrap">
+                            <span class="inline-flex min-w-[96px] items-center justify-center whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold tracking-wide
                                 @if($booking->status === 'confirmed') bg-green-100 text-green-800
                                 @elseif($booking->status === 'pending') bg-yellow-100 text-yellow-800
                                 @elseif($booking->status === 'checked_in') bg-blue-100 text-blue-800
@@ -47,8 +47,8 @@
                                 {{ ucfirst(str_replace('_', ' ', $booking->status)) }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 text-sm">
-                            <span class="px-3 py-1 rounded-full text-xs font-semibold
+                        <td class="px-6 py-4 text-sm whitespace-nowrap">
+                            <span class="inline-flex min-w-[84px] items-center justify-center whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold tracking-wide
                                 @if($booking->payment?->status === 'completed') bg-green-100 text-green-800
                                 @elseif($booking->payment?->status === 'pending') bg-yellow-100 text-yellow-800
                                 @else bg-red-100 text-red-800

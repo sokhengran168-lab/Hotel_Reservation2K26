@@ -6,7 +6,7 @@
 
         <!-- Back Button -->
         <a href="{{ route('customer.rooms.index') }}" style="display: inline-block; color: #e5e8ef; font-weight: 800; margin-bottom: 30px; margin-top:20px;">
-            <i class="fas fa-arrow-left"></i> Back to Rooms
+           </i> Back to Rooms
         </a>
 
         <div class="row justify-content-center">

@@ -69,8 +69,8 @@
                         <td>{{ $booking->start_date->format('M d, Y') }}</td>
                         <td>{{ $booking->end_date->format('M d, Y') }}</td>
                         <td>${{ number_format($booking->total_amount, 2) }}</td>
-                        <td>
-                            <span class="badge {{ $badgeClass }}">
+                        <td style="white-space: nowrap;">
+                            <span class="badge {{ $badgeClass }}" style="white-space: nowrap;">
                                 {{ ucfirst(str_replace('_', ' ', $booking->status)) }}
                             </span>
                         </td>

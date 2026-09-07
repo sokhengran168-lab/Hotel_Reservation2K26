@@ -1,4 +1,4 @@
-<x-guest-layout>
+<>
     <style>
         body {
             background:linear-gradient(135deg, #374679 0%, #abb2c4 100%);
@@ -201,4 +201,3 @@
             </form>
         </div>
     </div>
-</x-guest-layout>

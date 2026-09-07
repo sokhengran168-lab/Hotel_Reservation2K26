@@ -14,8 +14,8 @@
             --brand-navy: #07132f;
             --brand-gold: #d7aa46;
             --brand-light: #f8f3e8;
-            --brand-soft: rgba(215, 170, 70, 0.15);
-            --brand-border: rgba(215, 170, 70, 0.24);
+            --brand-soft: rgba(225, 181, 85, 0.15);
+            --brand-border: rgba(192, 142, 33, 0.24);
         }
 
         body {
@@ -75,31 +75,16 @@
             width: 100%;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #e2b24e 0%, #c59629 100%) !important;
-            border: none !important;
-            color: #081025 !important;
-            font-weight: 700;
-            padding: 12px 28px;
-            box-shadow: 0 12px 30px rgba(214, 171, 68, 0.24);
-        }
+            .btn-outline-warning {
+                border-color: rgba(215, 170, 70, 0.7) !important;
+                color: var(--brand-light) !important;
+                background: transparent !important;
+            }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 18px 35px rgba(214, 171, 68, 0.35);
-        }
-
-        .btn-outline-warning {
-            border-color: rgba(215, 170, 70, 0.7) !important;
-            color: var(--brand-light) !important;
-            background: transparent !important;
-        }
-
-        .btn-outline-warning:hover {
-            background: rgba(215, 170, 70, 0.14) !important;
-            color: var(--brand-light) !important;
-        }
-
+            .btn-outline-warning:hover {
+                background: rgba(215, 170, 70, 0.14) !important;
+                color: var(--brand-light) !important;
+            }
         .footer {
             background: transparent;
             padding: 60px 0 20px;
@@ -208,11 +193,11 @@
 
                     <form method="POST" action="{{ route('logout') }}" class="d-inline">
                         @csrf
-                        <button class="btn btn-danger">Logout</button>
+                        <button class="btn btn-outline-warning">Logout</button>
                     </form>
                         @else
                             <!-- Guest -->
-                            <a href="{{ route('login') }}" class="btn btn-primary me-2">Login</a>
+                            <a href="{{ route('login') }}" class="btn btn-outline-warning me-2">Login</a>
                             <a href="{{ route('register') }}" class="btn btn-outline-warning">Register</a>
                         @endauth
 

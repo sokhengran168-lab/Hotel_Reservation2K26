@@ -157,4 +157,3 @@
             </form>
         </div>
     </div>
-</x-guest-layout>

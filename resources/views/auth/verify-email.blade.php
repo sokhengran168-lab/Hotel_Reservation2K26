@@ -99,20 +99,20 @@
         .logout-btn {
             width: 100%;
             padding: 15px;
-            background: transparent;
-            color: rgba(255,255,255,0.7);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: linear-gradient(135deg, #d7aa46, #f3d27b);
+            color: #07132f;
+            border: none;
             border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .logout-btn:hover {
-            background: rgba(255,100,100,0.15);
-            border-color: rgba(255,100,100,0.4);
-            color: #ff9999;
+             background: rgba(255, 255, 255, 0.95);
+             transform: translateY(-2px);
+             box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
         }
 
         .status-message {
@@ -154,4 +154,3 @@
             </div>
         </div>
     </div>
-</x-guest-layout>

@@ -11,7 +11,7 @@
         <!-- page book form  -->
         <!-- Back Button -->
         <a href="{{ route('customer.rooms.index') }}" style="display: inline-block; color: #f3f5f9; font-weight: 600; margin-bottom: 30px;">
-            <i class="fas fa-arrow-left"></i> Back to Rooms
+          </i> Back to Rooms
         </a>
 
         <div class="row g-4">

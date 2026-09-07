@@ -7,7 +7,7 @@
             <h1 style="font-size:1.8rem; font-weight:800; color:#1e3a8a; margin:0;">Edit Payment Status</h1>
             <p style="color:#6b7280; margin:6px 0 0;">Update the payment record and confirm the latest transaction state.</p>
         </div>
-        <a href="{{ route('admin.payments.index') }}" style="background:#f3f4f6; color:#374151; padding:10px 20px; border-radius:10px; text-decoration:none; font-weight:600; font-size:0.95rem;">← Back to Payments</a>
+        <a href="{{ route('admin.payments.index') }}" style="background:#f3f4f6; color:#374151; padding:10px 20px; border-radius:10px; text-decoration:none; font-weight:600; font-size:0.95rem;"> Back to Payments</a>
     </div>
 
     @if ($errors->any())

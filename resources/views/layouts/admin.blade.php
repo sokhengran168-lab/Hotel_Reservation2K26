@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">  
     <title>Hotel Admin - @yield('title', 'Dashboard')</title>
+    <link rel="icon" type="image/png" href="{{ asset('image/logo.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('image/logo.png') }}">
      @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         * {
@@ -14,14 +16,14 @@
         }
 
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1e40af;
-            --primary-light: #3b82f6;
+            --primary: #1f3461;
+            --primary-dark: #1e293b;
+            --primary-light: #f59e0b;
             --accent: #f59e0b;
             --success: #10b981;
             --danger: #ef4444;
             --warning: #f59e0b;
-            --white: #ffffff;
+            --white:   #f3ead4;
             --gray-50: #f9fafb;
             --gray-100: #f3f4f6;
             --gray-200: #e5e7eb;
@@ -30,11 +32,11 @@
             --gray-500: #6b7280;
             --gray-600: #4b5563;
             --gray-700: #374151;
-            --gray-800: #1f2937;
-            --gray-900: #111827;
-            --text-primary: #111827;
-            --text-secondary: #6b7280;
-            --bg-primary: #f9fafb;
+            --gray-800:#f3ead4;
+            --gray-900: #192e59;
+            --text-primary: #0f1b35;
+            --text-secondary:rgb(99, 74, 6);
+            --bg-primary: #f3ead4;
         }
 
         body {
@@ -201,24 +203,25 @@
         }
 
         .logout-btn {
-            background: var(--danger);
-            color: var(--white);
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 6px;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: transparent;
+            color: #0f1b35;
+            border: 1px solid rgba(215, 170, 70, 0.7);
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         .logout-btn:hover {
-            background: #dc2626;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+            background: rgba(215, 170, 70, 0.14);
+            color: #f8f3e8;
+            transform: translateY(-2px);
         }
 
         /* Content Area */
@@ -343,8 +346,9 @@
         }
 
         .btn {
-            padding: 10px 16px;
-            border-radius: 6px;
+        
+            padding: 8px 10px;
+            border-radius: 5px;
             border: none;
             font-size: 14px;
             font-weight: 500;
@@ -402,6 +406,7 @@
             padding: 14px 16px;
             border-bottom: 1px solid var(--gray-200);
             color: var(--text-primary);
+            white-space: nowrap;
         }
 
         .table tbody tr:hover {
@@ -411,11 +416,15 @@
         .badge {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            min-width: 96px;
             padding: 6px 12px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
             text-transform: capitalize;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .badge-success {
@@ -431,6 +440,11 @@
         .badge-danger {
             background: #fee2e2;
             color: #991b1b;
+        }
+
+        .badge-secondary {
+            background: #e5e7eb;
+            color: #374151;
         }
 
         /* Footer */
@@ -546,64 +560,60 @@
             </svg>
             Hotel Admin
         </div>
-        <ul class="sidebar-menu">
-            <li><a href="/admin/dashboard" class="@if(Route::current()->getName() === 'admin.dashboard') active @endif">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="3" width="7" height="7"></rect>
-                    <rect x="14" y="3" width="7" height="7"></rect>
-                    <rect x="14" y="14" width="7" height="7"></rect>
-                    <rect x="3" y="14" width="7" height="7"></rect>
-                </svg>
-                Dashboard
-            </a></li>
-            <li><a href="/admin/bookings" class="@if(Route::current()->getName() === 'admin.bookings') active @endif">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                </svg>
-                Bookings
-            </a></li>
-            <li><a href="/admin/rooms" class="@if(Route::current()->getName() === 'admin.rooms') active @endif">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"></path>
-                    <div class="flex gap-2">
-                        <rect x="5" y="7" width="5" height="4"></rect>
-                        <rect x="14" y="7" width="5" height="4"></rect>
-                    </div>
-                </svg>
-                Rooms
-            </a></li>
-            <li><a href="/admin/guests" class="@if(Route::current()->getName() === 'admin.guests') active @endif">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-                Guests
-            </a></li>
-            <li><a href="/admin/payments" class="@if(Route::current()->getName() === 'admin.payments') active @endif">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-                    <line x1="1" y1="10" x2="23" y2="10"></line>
-                </svg>
-                Payments
-            </a></li>
-            <li><a href="/admin/reports" class="@if(Route::current()->getName() === 'admin.reports') active @endif">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="12" y1="2" x2="12" y2="22"></line>
-                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                </svg>
-                Reports
-            </a></li>
-            <li><a href="/admin/settings" class="@if(Route::current()->getName() === 'admin.settings') active @endif">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="3"></circle>
-                    <path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m3.08 3.08l4.24 4.24M1 12h6m6 0h6m-4.22-7.78l4.24-4.24m-3.08 10.32l4.24 4.24"></path>
-                </svg>
-                Settings
-            </a></li>
-        </ul>
+       <ul class="sidebar-menu">
+    <li><a href="/admin/dashboard" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        Dashboard
+    </a></li>
+    <li><a href="/admin/bookings" class="{{ request()->routeIs('admin.bookings*') ? 'active' : '' }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        Bookings
+    </a></li>
+    <li><a href="/admin/rooms" class="{{ request()->routeIs('admin.rooms*') ? 'active' : '' }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"></path>
+        </svg>
+        Rooms
+    </a></li>
+    <li><a href="/admin/guests" class="{{ request()->routeIs('admin.guests*') ? 'active' : '' }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        Guests
+    </a></li>
+    <li><a href="/admin/payments" class="{{ request()->routeIs('admin.payments*') ? 'active' : '' }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+            <line x1="1" y1="10" x2="23" y2="10"></line>
+        </svg>
+        Payments
+    </a></li>
+    <li><a href="/admin/reports" class="{{ request()->routeIs('admin.reports*') ? 'active' : '' }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="2" x2="12" y2="22"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+        </svg>
+        Reports
+    </a></li>
+    <li><a href="/admin/settings" class="{{ request()->routeIs('admin.settings*') ? 'active' : '' }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m3.08 3.08l4.24 4.24M1 12h6m6 0h6m-4.22-7.78l4.24-4.24m-3.08 10.32l4.24 4.24"></path>
+        </svg>
+        Settings
+    </a></li>
+</ul>
     </div>
 
     <!-- Main Content -->
