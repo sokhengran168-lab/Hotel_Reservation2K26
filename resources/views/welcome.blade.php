@@ -78,7 +78,7 @@
 {{-- ══════════════════════════════════════════
     ABOUT
 ══════════════════════════════════════════ --}}
-<section id="about" style="padding:100px 0; background:#02081c;">
+<section id="about" style="padding:100px 0; background:">
     <div class="container">
         <div class="row align-items-center g-5">
             <div class="col-lg-6">

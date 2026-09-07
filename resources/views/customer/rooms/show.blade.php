@@ -6,11 +6,11 @@
 
 @section('content')
             
-<div style="background: #8d8e90; padding: 60px 0; min-height: 100vh;">
+<div style="background:#d2c8ac; padding: 60px 0; min-height: 100vh;">
     <div class="container">
         <!-- page book form  -->
         <!-- Back Button -->
-        <a href="{{ route('customer.rooms.index') }}" style="display: inline-block; color: #f3f5f9; font-weight: 600; margin-bottom: 30px;">
+        <a href="{{ route('customer.rooms.index') }}" style="display: inline-block; color: #0e0e0f; font-weight: 600; margin-bottom: 30px;">
           </i> Back to Rooms
         </a>
 

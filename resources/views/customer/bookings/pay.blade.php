@@ -1,7 +1,7 @@
 @extends('layouts.customer')
 
 @section('content')
-<div style="background: #07132f ;padding: 80px 0; min-height: 100vh; display: flex; align-items: center;">
+<div style="background:#f3ead4;padding: 80px 0; min-height: 100vh; display: flex; align-items: center;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">

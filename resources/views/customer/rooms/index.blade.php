@@ -15,7 +15,7 @@
 </section>
 
 {{-- Rooms Grid --}}
-<section style="background:#02081c; padding:60px 0 80px;">
+<section style="background:#f3ead4; padding:60px 0 80px;">
     <div class="container">
         <div class="row g-4">
             @foreach($rooms as $room)

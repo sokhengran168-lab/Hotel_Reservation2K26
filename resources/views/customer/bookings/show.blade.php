@@ -1,11 +1,11 @@
 @extends('layouts.customer')
 
 @section('content')
-<div style="background: #07132f; padding: 100px 0; min-height: 80vh; display: flex; align-items: center;">
+<div style="background:#f3ead4; padding: 100px 0; min-height: 80vh; display: flex; align-items: center;">
     <div class="container">
 
         <!-- Back Button -->
-        <a href="{{ route('customer.rooms.index') }}" style="display: inline-block; color: #e5e8ef; font-weight: 800; margin-bottom: 30px; margin-top:20px;">
+        <a href="{{ route('customer.rooms.index') }}" style="display: inline-block; color: #101114; font-weight: 800; margin-bottom: 30px; margin-top:20px;">
            </i> Back to Rooms
         </a>
 
