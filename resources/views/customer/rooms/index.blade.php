@@ -24,8 +24,7 @@
                     $isBooked = $room->bookings->isNotEmpty();
                 @endphp
                 <div class="col-md-6 col-lg-4">
-                    <div style="background:#07132f; border:1px solid rgba(215,170,70,0.12); border-radius:6px; overflow:hidden; height:100%; transition:all 0.3s;" class="room-card">
-
+                    <div style="background:#07132f; border:1px solid rgba(215,170,70,0.12); border-radius:6px; overflow:hidden; height:100%; transition:all 0.3s; display:flex; flex-direction:column;" class="room-card">
                         {{-- Image --}}
                         <div style="position:relative; height:240px; overflow:hidden;">
                             @if($thumb)
@@ -52,8 +51,8 @@
                             </div>
                         </div>
 
-                        {{-- Info --}}
-                        <div style="padding:24px;">
+                      {{-- Info --}}
+                        <div style="padding:24px; display:flex; flex-direction:column; flex:1;">
                             <div style="color:rgba(215,170,70,0.7); font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:8px;">
                                 {{ $room->type ?? 'Standard Room' }}
                             </div>
@@ -65,8 +64,15 @@
                                 <span style="color:rgba(255,255,255,0.5); font-size:0.82rem;">👥 {{ $room->max_adults }} Adults</span>
                             </div>
 
+                            {{-- Description --}}
+                            @if($room->description)
+                                <p style="color:rgba(255,255,255,0.55); font-size:0.85rem; line-height:1.6; margin-bottom:20px;">
+                                    {{ \Illuminate\Support\Str::limit($room->description, 90) }}
+                                </p>
+                            @endif
+
                             {{-- Features --}}
-                            <div style="margin-bottom:22px;">
+                            <div style="margin-bottom:22px; flex:1;">
                                 @if($room->features && count($room->features) > 0)
                                     @foreach(array_slice($room->features, 0, 3) as $f)
                                         <div style="color:rgba(255,255,255,0.55); font-size:0.82rem; margin-bottom:5px;">
@@ -89,11 +95,10 @@
                                 <a href="{{ route('customer.rooms.show', $room->id) }}"
                                     style="display:block; width:100%; background:linear-gradient(135deg,#e2b24e,#c59629); color:#081025; padding:14px; text-align:center; border-radius:4px; font-weight:700; text-decoration:none; font-size:0.88rem; letter-spacing:1.5px; text-transform:uppercase; transition:all 0.3s; box-sizing:border-box;"
                                     class="book-btn">
-                                     View Details →
+                                    View Details →
                                 </a>
                             @endif
                         </div>
-
                     </div>
                 </div>
             @endforeach
