@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
          * Authorization Gates
          */
         Gate::define('isAdmin', function (User $user) {
-            return $user->role === 'admin';
+            return $user->isAdmin();
         });
 
         Gate::define('isModerator', function (User $user) {

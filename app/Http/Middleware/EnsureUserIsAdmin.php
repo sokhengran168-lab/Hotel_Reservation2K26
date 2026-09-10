@@ -9,7 +9,7 @@ class EnsureUserIsAdmin
 {
     public function handle(Request $request, Closure $next)
     {
-        if (! auth()->check() || (auth()->user()->role ?? '') !== 'admin') {
+        if (! auth()->check() || ! auth()->user()->isAdmin()) {
             // Option A: redirect to home with message
             return redirect()->route('home')->with('error', 'Unauthorized.');
 
