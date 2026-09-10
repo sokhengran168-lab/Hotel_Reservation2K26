@@ -29,159 +29,141 @@
         /* =========================
             NAVBAR
         ========================= */
-
-        .custom-navbar {
-            background: transparent;
-            padding: 18px 0;
-            border-bottom: 1px solid rgba(215, 170, 70, 0.18);
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
-        }
-
-        .custom-navbar .nav-logo {
-            height: 70px;
-            width: auto;
-            filter: brightness(1.1);
-        }
-
-        .custom-navbar .brand-name {
-            font-family: 'Times New Roman', Times, serif;
-            color: var(--brand-gold);
-            font-weight: 700;
-            font-size: 1.3rem;
-            margin-left: 14px;
-            letter-spacing: 1px;
-        }
-
-
-         /* Desktop navigation */
-
-        .nav-link {
-            color: var(--brand-light) !important;
-            font-weight: 600;
-            margin-right: 26px;
-            position: relative;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-            text-decoration: none;
-        }
-
+       .custom-navbar { 
+        background: transparent; 
+        padding: 18px 0; 
+        border-bottom: 1px solid rgba(215, 170, 70, 0.18);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28); 
+       }
+     .custom-navbar .nav-logo {
+         height: 70px; 
+         filter: brightness(1.1);
+         } 
+     .custom-navbar
+     .brand-name { font-family: 'Times New Roman', Times, serif; 
+     color: var(--brand-gold);
+      font-weight: 700;
+       font-size: 1.3rem; 
+       margin-left: 14px; 
+       letter-spacing: 1px; 
+    } 
+    .nav-link { 
+        color: var(--brand-light) !important;
+         font-weight: 600;
+          margin-right: 26px;
+           position: relative; transition:
+            all 0.3s ease; font-size: 0.95rem; 
+        } 
         .nav-link:after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--brand-gold);
-            transition: width 0.25s ease;
+         content: '';
+         position: absolute;
+          bottom: -6px; left: 0; 
+          width: 0;
+         height: 2px;
+         background-color: var(--brand-gold); transition: 
+         width 0.25s ease;
+         }
+         
+         .nav-link:hover, 
+         .nav-link.active { 
+            color: #ffffff !important; }
+            .nav-link:hover:after, 
+            .nav-link.active:after { 
+            width: 100%; }
+         .btn-outline-warning { border-color: rgba(215, 170, 70, 0.7) !important; 
+            color: var(--brand-light) !important;
+             background: transparent !important; } 
+         .btn-outline-warning:hover { background: rgba(215, 170, 70, 0.14) !important; 
+            color: var(--brand-light) !important; }
+
+
+        /* =========================
+        MOBILE MENU
+        ========================= */
+
+        .navbar-toggler {
+            border: 1px solid var(--brand-gold);
+            padding: 6px 8px;
+            border-radius: 6px;
         }
 
-        .nav-link:hover,
-        .nav-link.active {
-            color: #ffffff !important;
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 2px rgba(215, 170, 70, 0.25);
         }
 
-        .nav-link:hover:after,
-        .nav-link.active:after {
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+
+        /* Mobile menu container */
+
+        .mobile-menu {
+            padding: 15px 0;
+            margin-top: 12px;
+            border-top: 1px solid rgba(215, 170, 70, 0.18);
+        }
+
+
+        /* Mobile links */
+
+        .mobile-nav-link {
+            display: block;
             width: 100%;
-        }
-
-
-        /* Login / Register / Logout buttons */
-
-        .btn-outline-warning {
-            border-color: rgba(215, 170, 70, 0.7) !important;
+            padding: 12px 5px;
             color: var(--brand-light) !important;
-            background: transparent !important;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(215, 170, 70, 0.12);
+            background: transparent;
         }
 
-        .btn-outline-warning:hover {
-            background: rgba(215, 170, 70, 0.14) !important;
-            color: var(--brand-light) !important;
+        .mobile-nav-link:hover {
+            color: var(--brand-gold) !important;
         }
 
 
-/* =========================
-   MOBILE MENU
-   ========================= */
+        /* Mobile logout form */
 
-.navbar-toggler {
-    border: 1px solid var(--brand-gold);
-    padding: 6px 8px;
-    border-radius: 6px;
-}
+        .mobile-menu form {
+            margin: 0;
+        }
 
-.navbar-toggler:focus {
-    box-shadow: 0 0 0 2px rgba(215, 170, 70, 0.25);
-}
+        .mobile-menu-actions {
+            display: flex;
+            gap: 10px;
+            padding-top: 14px;
+        }
 
-.navbar-toggler-icon {
-    filter: invert(1);
-}
-
-
-/* Mobile menu container */
-
-.mobile-menu {
-    padding: 15px 0;
-    margin-top: 12px;
-    border-top: 1px solid rgba(215, 170, 70, 0.18);
-}
+        .mobile-logout {
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: inherit;
+        }
 
 
-/* Mobile links */
+            /* =========================
+            MOBILE RESPONSIVE
+            ========================= */
 
-.mobile-nav-link {
-    display: block;
-    width: 100%;
-    padding: 12px 5px;
-    color: var(--brand-light) !important;
-    text-decoration: none;
-    font-weight: 600;
-    border-bottom: 1px solid rgba(215, 170, 70, 0.12);
-    background: transparent;
-}
+            @media (max-width: 768px) {
 
-.mobile-nav-link:hover {
-    color: var(--brand-gold) !important;
-}
+                .custom-navbar {
+                    padding: 10px 0;
+                }
 
+                .custom-navbar .nav-logo {
+                    height: 55px;
+                }
 
-/* Mobile logout form */
+                .custom-navbar .brand-name {
+                    font-size: 1.05rem;
+                    margin-left: 8px;
+                }
 
-.mobile-menu form {
-    margin: 0;
-}
-
-.mobile-logout {
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: inherit;
-}
-
-
-/* =========================
-   MOBILE RESPONSIVE
-   ========================= */
-
-@media (max-width: 768px) {
-
-    .custom-navbar {
-        padding: 10px 0;
-    }
-
-    .custom-navbar .nav-logo {
-        height: 55px;
-    }
-
-    .custom-navbar .brand-name {
-        font-size: 1.05rem;
-        margin-left: 8px;
-    }
-
-}
+            }
      
         .footer {
             background: transparent;
@@ -252,7 +234,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             opacity: 0.8;
         }
-        
+
     </style>
     @yield('styles')
     @yield('head')
@@ -260,141 +242,62 @@
 <body>
     <!-- NAVBAR -->
     <nav class="custom-navbar sticky-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <img src="{{ asset('image/logo.png') }}" alt="Sunset Heaven Logo" class="nav-logo">
+                <span class="brand-name">Sunset Heaven</span>
+            </div>
+            <div class="d-none d-md-flex">
+                <a href="{{ route('home') }}" class="nav-link">Home</a>
+                <a href="{{ route('customer.rooms.index') }}" class="nav-link">Our Rooms</a>
+                <a href="{{ route('customer.bookings.index') }}" class="nav-link">Booking Tracker</a>
+            </div>
+            <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#customerMobileMenu" aria-controls="customerMobileMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span aria-hidden="true">☰</span>
+            </button>
+            <div class="d-none d-md-flex">
+                  @auth
+                    @php $role = Auth::user()->fresh()->role ?? 'customer'; @endphp
+
+                    {{-- Hidden Dashboard button per request: show Profile and Logout only --}}
+                    @if (Route::has('profile.edit'))
+                        <a href="{{ route('profile.edit') }}" class="btn btn-outline-secondary me-2">Profile</a>
+                    @endif
+
+                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                        @csrf
+                        <button class="btn btn-outline-warning">Logout</button>
+                    </form>
+                        @else
+                            <!-- Guest -->
+                            <a href="{{ route('login') }}" class="btn btn-outline-warning me-2">Login</a>
+                            <a href="{{ route('register') }}" class="btn btn-outline-warning">Register</a>
+                        @endauth
+
+
+
+            </div>
+        </div>
         <div class="container">
-
-            <div class="d-flex justify-content-between align-items-center">
-
-                <!-- Logo + Brand -->
-                <a href="{{ route('home') }}" class="text-decoration-none d-flex align-items-center">
-                    <img src="{{ asset('image/logo.png') }}"
-                        alt="Sunset Heaven Logo"
-                        class="nav-logo">
-
-                    <span class="brand-name">Sunset Heaven</span>
-                </a>
-
-                <!-- Desktop Navigation -->
-                <div class="d-none d-md-flex align-items-center">
-
-                    <a href="{{ route('home') }}" class="nav-link">
-                        Home
-                    </a>
-
-                    <a href="{{ route('customer.rooms.index') }}" class="nav-link">
-                        Our Rooms
-                    </a>
-
-                    <a href="{{ route('customer.bookings.index') }}" class="nav-link">
-                        Booking Tracker
-                    </a>
-
+            <div class="collapse mobile-menu" id="customerMobileMenu">
+                <a href="{{ route('home') }}" class="mobile-nav-link">Home</a>
+                <a href="{{ route('customer.rooms.index') }}" class="mobile-nav-link">Our Rooms</a>
+                <a href="{{ route('customer.bookings.index') }}" class="mobile-nav-link">Booking Tracker</a>
+                <div class="mobile-menu-actions">
                     @auth
-
                         @if (Route::has('profile.edit'))
-                            <a href="{{ route('profile.edit') }}"
-                            class="btn btn-outline-secondary me-2">
-                                Profile
-                            </a>
+                            <a href="{{ route('profile.edit') }}" class="btn btn-outline-secondary">Profile</a>
                         @endif
-
-                        <form method="POST"
-                            action="{{ route('logout') }}"
-                            class="d-inline">
+                        <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
-                            <button class="btn btn-outline-warning">
-                                Logout
-                            </button>
+                            <button class="btn btn-outline-warning mobile-logout">Logout</button>
                         </form>
-
                     @else
-
-                        <a href="{{ route('login') }}"
-                        class="btn btn-outline-warning me-2">
-                            Login
-                        </a>
-
-                        <a href="{{ route('register') }}"
-                        class="btn btn-outline-warning">
-                            Register
-                        </a>
-
+                        <a href="{{ route('login') }}" class="btn btn-outline-warning">Login</a>
+                        <a href="{{ route('register') }}" class="btn btn-outline-warning">Register</a>
                     @endauth
-
                 </div>
-
-
-                <!-- Mobile Hamburger -->
-                <button class="navbar-toggler d-md-none"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#mobileNavbar"
-                        aria-controls="mobileNavbar"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-
-                    <span class="navbar-toggler-icon"></span>
-
-                </button>
-
             </div>
-
-
-            <!-- Mobile Menu -->
-            <div class="collapse d-md-none" id="mobileNavbar">
-
-                <div class="mobile-menu">
-
-                    <a href="{{ route('home') }}" class="mobile-nav-link">
-                        Home
-                    </a>
-
-                    <a href="{{ route('customer.rooms.index') }}"
-                    class="mobile-nav-link">
-                        Our Rooms
-                    </a>
-
-                    <a href="{{ route('customer.bookings.index') }}"
-                    class="mobile-nav-link">
-                        Booking Tracker
-                    </a>
-
-                    @auth
-
-                        @if (Route::has('profile.edit'))
-                            <a href="{{ route('profile.edit') }}"
-                            class="mobile-nav-link">
-                                Profile
-                            </a>
-                        @endif
-
-                        <form method="POST"
-                            action="{{ route('logout') }}">
-                            @csrf
-
-                            <button class="mobile-nav-link mobile-logout">
-                                Logout
-                            </button>
-                        </form>
-
-                    @else
-
-                        <a href="{{ route('login') }}"
-                        class="mobile-nav-link">
-                            Login
-                        </a>
-
-                        <a href="{{ route('register') }}"
-                        class="mobile-nav-link">
-                            Register
-                        </a>
-
-                    @endauth
-
-                </div>
-
-            </div>
-
         </div>
     </nav>
 
@@ -445,7 +348,7 @@
     </footer>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    @yield('scripts')
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> 
+    @yield('scripts') 
+</body>   
 </html>
