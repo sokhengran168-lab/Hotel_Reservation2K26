@@ -170,6 +170,17 @@ Route::post('/webhooks/aba', [PaymentWebhookController::class, 'handleAba'])
     ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class])
     ->name('webhook.aba');
 
+
+Route::get('/debug-cloudinary', function () {
+    $url = env('cloudinary://211739375232724:_Hdvmod5dOv6naRrt6QIb_2VpsQ@pcx0peif');
+    return response()->json([
+        'raw_env_set' => $url ? true : false,
+        'raw_env_length' => $url ? strlen($url) : 0,
+        'raw_env_preview' => $url ? substr($url, 0, 20) . '...' : null,
+        'config_cloud_url' => config('cloudinary.cloud_url') ? 'SET' : 'NULL',
+    ]);
+});
+
 /*
 |--------------------------------------------------------------------------
 | AUTH ROUTES
