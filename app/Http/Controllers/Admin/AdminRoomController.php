@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Room;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class AdminRoomController extends Controller
 {
@@ -30,7 +30,7 @@ class AdminRoomController extends Controller
             'capacity'    => 'required|integer|min:1',
             'features'    => 'nullable|string',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'images.*'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'images.*'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $data['features'] = $data['features']
@@ -39,13 +39,19 @@ class AdminRoomController extends Controller
 
         // Main image fallback from uploaded images
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('rooms', 'public');
+            $data['image'] = Cloudinary::upload(
+                $request->file('image')->getRealPath(),
+                ['folder' => 'rooms']
+            )->getSecurePath();
         }
 
         if ($request->hasFile('images')) {
             $paths = [];
             foreach ($request->file('images') as $file) {
-                $paths[] = $file->store('rooms', 'public');
+                $paths[] = Cloudinary::upload(
+                    $file->getRealPath(),
+                    ['folder' => 'rooms']
+                )->getSecurePath();
             }
             $data['images'] = $paths;
             if (empty($data['image'])) {
@@ -91,28 +97,28 @@ class AdminRoomController extends Controller
 
         // Main image
         if ($request->hasFile('image')) {
-            if ($room->image && Storage::disk('public')->exists($room->image)) {
-                Storage::disk('public')->delete($room->image);
-            }
-            $data['image'] = $request->file('image')->store('rooms', 'public');
+            $this->deleteCloudinaryImage($room->image);
+            $data['image'] = Cloudinary::upload(
+                $request->file('image')->getRealPath(),
+                ['folder' => 'rooms']
+            )->getSecurePath();
         }
 
         if ($request->hasFile('images')) {
             if ($room->images) {
                 foreach ($room->images as $old) {
-                    if (Storage::disk('public')->exists($old)) {
-                        Storage::disk('public')->delete($old);
-                    }
+                    $this->deleteCloudinaryImage($old);
                 }
             }
 
-            if ($room->image && Storage::disk('public')->exists($room->image)) {
-                Storage::disk('public')->delete($room->image);
-            }
+            $this->deleteCloudinaryImage($room->image);
 
             $paths = [];
             foreach ($request->file('images') as $file) {
-                $paths[] = $file->store('rooms', 'public');
+                $paths[] = Cloudinary::upload(
+                    $file->getRealPath(),
+                    ['folder' => 'rooms']
+                )->getSecurePath();
             }
             $data['images'] = $paths;
             $data['image'] = $paths[0] ?? null;
@@ -127,16 +133,11 @@ class AdminRoomController extends Controller
     {
         $room = Room::findOrFail($id);
 
-        if ($room->image && Storage::disk('public')->exists($room->image)) {
-            Storage::disk('public')->delete($room->image);
-        }
+        $this->deleteCloudinaryImage($room->image);
 
-        // ✅ Delete extra images too
         if ($room->images) {
             foreach ($room->images as $img) {
-                if (Storage::disk('public')->exists($img)) {
-                    Storage::disk('public')->delete($img);
-                }
+                $this->deleteCloudinaryImage($img);
             }
         }
 
@@ -145,5 +146,29 @@ class AdminRoomController extends Controller
         return redirect()->route('admin.rooms.index')->with('success', 'Room deleted successfully.');
     }
 
-      
+    /**
+     * Delete an image from Cloudinary given its full secure URL.
+     * Safely does nothing if the URL isn't a Cloudinary URL (e.g. old
+     * local storage paths from before the migration to Cloudinary).
+     */
+    private function deleteCloudinaryImage(?string $url): void
+    {
+        if (!$url || !str_contains($url, 'res.cloudinary.com')) {
+            return;
+        }
+
+        // Example URL:
+        // https://res.cloudinary.com/pcx0peif/image/upload/v1234567890/rooms/abcde12345.jpg
+        // We need to extract: rooms/abcde12345
+        if (preg_match('#/upload/(?:v\d+/)?(.+)\.\w+$#', $url, $matches)) {
+            $publicId = $matches[1];
+            try {
+                Cloudinary::destroy($publicId);
+            } catch (\Exception $e) {
+                // Log and continue — don't block the request if Cloudinary
+                // deletion fails (e.g. network hiccup, already deleted).
+                report($e);
+            }
+        }
+    }
 }
