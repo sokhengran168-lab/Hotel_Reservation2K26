@@ -5,10 +5,24 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Room;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Cloudinary\Configuration\Configuration;
+use Cloudinary\Api\Upload\UploadApi;
+use Cloudinary\Api\Admin\AdminApi;
 
 class AdminRoomController extends Controller
 {
+    
+    private function configureCloudinary(): void
+    {
+        $url = config('services.cloudinary.url') ?: env('CLOUDINARY_URL');
+
+        if (!$url) {
+            throw new \RuntimeException('CLOUDINARY_URL is not set. Check your environment configuration.');
+        }
+
+        Configuration::instance($url);
+    }
+
     public function index()
     {
         $rooms = Room::paginate(15);
@@ -37,21 +51,26 @@ class AdminRoomController extends Controller
             ? array_values(array_filter(array_map('trim', explode(',', $data['features']))))
             : null;
 
+        $this->configureCloudinary();
+        $uploadApi = new UploadApi();
+
         // Main image fallback from uploaded images
         if ($request->hasFile('image')) {
-            $data['image'] = Cloudinary::upload(
+            $result = $uploadApi->upload(
                 $request->file('image')->getRealPath(),
                 ['folder' => 'rooms']
-            )->getSecurePath();
+            );
+            $data['image'] = $result['secure_url'];
         }
 
         if ($request->hasFile('images')) {
             $paths = [];
             foreach ($request->file('images') as $file) {
-                $paths[] = Cloudinary::upload(
+                $result = $uploadApi->upload(
                     $file->getRealPath(),
                     ['folder' => 'rooms']
-                )->getSecurePath();
+                );
+                $paths[] = $result['secure_url'];
             }
             $data['images'] = $paths;
             if (empty($data['image'])) {
@@ -95,13 +114,17 @@ class AdminRoomController extends Controller
             ? array_values(array_filter(array_map('trim', explode(',', $data['features']))))
             : null;
 
+        $this->configureCloudinary();
+        $uploadApi = new UploadApi();
+
         // Main image
         if ($request->hasFile('image')) {
             $this->deleteCloudinaryImage($room->image);
-            $data['image'] = Cloudinary::upload(
+            $result = $uploadApi->upload(
                 $request->file('image')->getRealPath(),
                 ['folder' => 'rooms']
-            )->getSecurePath();
+            );
+            $data['image'] = $result['secure_url'];
         }
 
         if ($request->hasFile('images')) {
@@ -115,10 +138,11 @@ class AdminRoomController extends Controller
 
             $paths = [];
             foreach ($request->file('images') as $file) {
-                $paths[] = Cloudinary::upload(
+                $result = $uploadApi->upload(
                     $file->getRealPath(),
                     ['folder' => 'rooms']
-                )->getSecurePath();
+                );
+                $paths[] = $result['secure_url'];
             }
             $data['images'] = $paths;
             $data['image'] = $paths[0] ?? null;
@@ -146,27 +170,23 @@ class AdminRoomController extends Controller
         return redirect()->route('admin.rooms.index')->with('success', 'Room deleted successfully.');
     }
 
-    /**
-     * Delete an image from Cloudinary given its full secure URL.
-     * Safely does nothing if the URL isn't a Cloudinary URL (e.g. old
-     * local storage paths from before the migration to Cloudinary).
-     */
+   
+    
     private function deleteCloudinaryImage(?string $url): void
     {
         if (!$url || !str_contains($url, 'res.cloudinary.com')) {
             return;
         }
 
-        // Example URL:
-        // https://res.cloudinary.com/pcx0peif/image/upload/v1234567890/rooms/abcde12345.jpg
-        // We need to extract: rooms/abcde12345
+       
         if (preg_match('#/upload/(?:v\d+/)?(.+)\.\w+$#', $url, $matches)) {
             $publicId = $matches[1];
             try {
-                Cloudinary::destroy($publicId);
+                $this->configureCloudinary();
+                $uploadApi = new UploadApi();
+                $uploadApi->destroy($publicId);
             } catch (\Exception $e) {
-                // Log and continue — don't block the request if Cloudinary
-                // deletion fails (e.g. network hiccup, already deleted).
+               
                 report($e);
             }
         }
