@@ -172,12 +172,16 @@ Route::post('/webhooks/aba', [PaymentWebhookController::class, 'handleAba'])
 
 
 Route::get('/debug-cloudinary', function () {
-    $url = env('cloudinary://211739375232724:_Hdvmod5dOv6naRrt6QIb_2VpsQ@pcx0peif');
+    $allEnv = getenv();
+    $cloudKeys = array_filter(array_keys($allEnv), function ($key) {
+        return stripos($key, 'cloud') !== false;
+    });
+
     return response()->json([
-        'raw_env_set' => $url ? true : false,
-        'raw_env_length' => $url ? strlen($url) : 0,
-        'raw_env_preview' => $url ? substr($url, 0, 20) . '...' : null,
-        'config_cloud_url' => config('cloudinary.cloud_url') ? 'SET' : 'NULL',
+        'exact_key_found' => getenv('CLOUDINARY_URL') !== false,
+        'keys_containing_cloud' => array_values($cloudKeys),
+        'total_env_vars_count' => count($allEnv),
+        'sample_keys' => array_slice(array_keys($allEnv), 0, 15),
     ]);
 });
 
