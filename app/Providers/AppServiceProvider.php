@@ -3,19 +3,24 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\URL;
+use Cloudinary\Configuration\Configuration;
 
 class AppServiceProvider extends ServiceProvider
 {
+    
     public function register(): void
     {
         //
     }
 
+   
     public function boot(): void
     {
-        if (env('APP_ENV') === 'production') {
-            URL::forceScheme('https');
+        
+        $cloudinaryUrl = config('services.cloudinary.url');
+
+        if ($cloudinaryUrl) {
+            Configuration::instance($cloudinaryUrl);
         }
     }
 }

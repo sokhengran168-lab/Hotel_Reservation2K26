@@ -31,4 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    // config/services.php — add this array entry alongside 'stripe', 'paypal', etc.
+
+        'cloudinary' => [
+            'url' => env('CLOUDINARY_URL'),
+        ],
+
 ];
