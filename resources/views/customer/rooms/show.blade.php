@@ -360,10 +360,17 @@ function submitBooking(e) {
     .then(res => { window.location.href = res.redirect; })
     .catch(err => {
         let msg = 'Booking failed. ';
-        if (err.errors)      msg += Object.values(err.errors)[0][0];
-        else if (err.error)  msg += err.error;
-        else if (err.message) msg += err.message;
-        else msg += 'Please check your details and try again.';
+        if (err.message === 'Unauthenticated.') {
+            msg = 'Please register or log in first before booking a room.';
+        } else if (err.errors) {
+            msg += Object.values(err.errors)[0][0];
+        } else if (err.error) {
+            msg += err.error;
+        } else if (err.message) {
+            msg += err.message;
+        } else {
+            msg += 'Please check your details and try again.';
+        }
         alert(msg);
         btn.disabled = false;
         btn.innerHTML = '<i class="fas fa-credit-card"></i> Book Now & Pay';
