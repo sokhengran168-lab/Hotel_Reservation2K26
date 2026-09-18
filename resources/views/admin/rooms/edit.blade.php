@@ -99,8 +99,8 @@
                     <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:10px;">
                         @foreach($allCurrent as $i => $img)
                             <div style="position:relative; border-radius:10px; overflow:hidden; aspect-ratio:1;">
-                                <img src="{{ asset('storage/'.$img) }}"
-                                     style="width:100%; height:100%; object-fit:cover; display:block;">
+                              <img src="{{ Str::startsWith($img, 'http') ? $img : asset('storage/'.$img) }}"
+                                style="width:100%; height:100%; object-fit:cover; display:block;">
                                 @if($i === 0)
                                     <div style="position:absolute; bottom:6px; left:6px; background:#4f46e5; color:white; font-size:0.7rem; font-weight:700; padding:2px 10px; border-radius:20px;">Cover</div>
                                 @endif

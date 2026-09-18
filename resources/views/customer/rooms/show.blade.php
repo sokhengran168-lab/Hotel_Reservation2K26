@@ -30,7 +30,7 @@
                         {{-- Main large image --}}
                         <div style="flex:1; min-height:0;">
                             <img id="mainImg"
-                                 src="{{ asset('storage/'.$allImages[0]) }}"
+                                 src="{{ Str::startsWith($allImages[0], 'http') ? $allImages[0] : asset('storage/'.$allImages[0]) }}"
                                  onclick="openLightbox(0)"
                                  style="width:100%; height:100%; object-fit:cover; display:block; cursor:zoom-in; min-height:320px;">
                         </div>
@@ -41,8 +41,9 @@
                                 @foreach($allImages as $i => $img)
                                     @if($i > 0)
                                         <div style="position:relative; aspect-ratio:16/9; overflow:hidden;">
-                                            <img src="{{ asset('storage/'.$img) }}"
-                                                 onclick="switchMain('{{ asset('storage/'.$img) }}', {{ $i }})"
+                                            @php $imgUrl = Str::startsWith($img, 'http') ? $img : asset('storage/'.$img); @endphp
+                                                <img src="{{ $imgUrl }}"
+                                                    onclick="switchMain('{{ $imgUrl }}', {{ $i }})"
                                                  style="width:100%; height:100%; object-fit:cover; cursor:pointer; transition:opacity 0.2s; opacity:0.85;"
                                                  onmouseover="this.style.opacity='1'"
                                                  onmouseout="this.style.opacity='0.85'">
@@ -218,7 +219,7 @@
 </div>
 
 <script>
-const allImages = {!! json_encode(array_map(fn($img) => asset('storage/'.$img), $allImages)) !!};
+const allImages = {!! json_encode(array_map(fn($img) => \Illuminate\Support\Str::startsWith($img, 'http') ? $img : asset('storage/'.$img), $allImages)) !!};
 let currentLight = 0;
 const roomPrice = parseFloat("{{ $room->price }}");
 let disabledDates = [];

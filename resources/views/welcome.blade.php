@@ -141,7 +141,7 @@
                     <div style="background:#07132f; border:1px solid rgba(215,170,70,0.12); border-radius:4px; overflow:hidden; transition:all 0.3s;" class="room-featured-card">
                         <div style="position:relative; height:200px; overflow:hidden;">
                             @if($thumb)
-                                <img src="{{ asset('storage/'.$thumb) }}" alt="Room {{ $room->number }}"
+                                <img src="{{ Str::startsWith($thumb, 'http') ? $thumb : asset('storage/'.$thumb) }}" alt="Room {{ $room->number }}"
                                      style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s;">
                             @else
                                 <div style="width:100%; height:100%; background:linear-gradient(135deg,#0d2045,#1a3a6e); display:flex; align-items:center; justify-content:center; font-size:3rem;">🏨</div>

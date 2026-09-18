@@ -49,7 +49,7 @@
                     {{-- Image --}}
                     <td style="padding:12px 16px;">
                         @if($thumbnail)
-                            <img src="{{ asset('storage/'.$thumbnail) }}"
+                           <img src="{{ Str::startsWith($thumbnail, 'http') ? $thumbnail : asset('storage/'.$thumbnail) }}"
                                  alt="Room {{ $room->number }}"
                                  style="width:80px; height:70px; object-fit:cover; border-radius:8px; border:1px solid #e5e7eb;">
                         @else
